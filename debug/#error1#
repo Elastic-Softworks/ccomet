@@ -1,0 +1,14 @@
+
+COMPILING src/video.c
+i586-pc-msdosdjgpp-gcc -g -Wall -std=c89 -pedantic -I/usr/local/djgpp/i586-pc-msdosdjgpp/sys-include -Iinclude -c src/video.c -o obj/video.o
+src/video.c: In function 'vid_setmode':
+src/video.c:28:3: error: unknown type name '__dpmi_regs'
+   28 |   __dpmi_regs r;
+      |   ^~~~~~~~~~~
+src/video.c:29:4: error: request for member 'x' in something not a structure or union
+   29 |   r.x.ax = mode;
+      |    ^
+src/video.c:30:3: warning: implicit declaration of function '__dpmi_int' [-Wimplicit-function-declaration]
+   30 |   __dpmi_int(0x10, &r);
+      |   ^~~~~~~~~~
+make: *** [Makefile:62: obj/video.o] Error 1

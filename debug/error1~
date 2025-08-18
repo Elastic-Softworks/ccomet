@@ -1,0 +1,39 @@
+COMPILING src/video.c
+i586-pc-msdosdjgpp-gcc -g -Wall -std=c89 -pedantic -v -I/usr/local/djgpp/i586-pc-msdosdjgpp/sys-include -Iinclude -c src/video.c -o obj/video.o
+Using built-in specs.
+COLLECT_GCC=i586-pc-msdosdjgpp-gcc
+Target: i586-pc-msdosdjgpp
+Configured with: ../gnu/gcc-12.20/configure --target=i586-pc-msdosdjgpp --program-prefix=i586-pc-msdosdjgpp- --prefix=/usr/local/djgpp --disable-nls --disable-plugin --disable-lto --enable-lto --enable-libstdcxx-filesystem-ts --enable-libquadmath-support --with-gmp=/home/vagrant/build-djgpp/build/djcross-gcc-12.2.0/tmpinst --with-mpfr=/home/vagrant/build-djgpp/build/djcross-gcc-12.2.0/tmpinst --with-mpc=/home/vagrant/build-djgpp/build/djcross-gcc-12.2.0/tmpinst --enable-version-specific-runtime-libs --enable-languages=c,c++
+Thread model: single
+Supported LTO compression algorithms: zlib
+gcc version 12.2.0 (GCC) 
+COLLECT_GCC_OPTIONS='-g' '-Wall' '-std=c90' '-Wpedantic' '-v' '-I' '/usr/local/djgpp/i586-pc-msdosdjgpp/sys-include' '-I' 'include' '-c' '-o' 'obj/video.o' '-mtune=pentium' '-march=pentium' '-dumpdir' 'obj/'
+ /usr/local/djgpp/libexec/gcc/i586-pc-msdosdjgpp/12.2.0/cc1 -quiet -v -I /usr/local/djgpp/i586-pc-msdosdjgpp/sys-include -I include -remap src/video.c -quiet -dumpdir obj/ -dumpbase video.c -dumpbase-ext .c -mtune=pentium -march=pentium -g -Wall -Wpedantic -std=c90 -version -o /tmp/ccGZHkeN.s
+GNU C89 (GCC) version 12.2.0 (i586-pc-msdosdjgpp)
+	compiled by GNU C version 8.3.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version none
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/local/djgpp/lib/gcc/i586-pc-msdosdjgpp/12.2.0/../../../../i586-pc-msdosdjgpp/include"
+ignoring duplicate directory "/usr/local/djgpp/i586-pc-msdosdjgpp/sys-include"
+  as it is a non-system directory that duplicates a system directory
+#include "..." search starts here:
+#include <...> search starts here:
+ include
+ /usr/local/djgpp/lib/gcc/i586-pc-msdosdjgpp/12.2.0/include
+ /usr/local/djgpp/lib/gcc/i586-pc-msdosdjgpp/12.2.0/include-fixed
+ /usr/local/djgpp/lib/gcc/i586-pc-msdosdjgpp/12.2.0/../../../../i586-pc-msdosdjgpp/sys-include
+End of search list.
+GNU C89 (GCC) version 12.2.0 (i586-pc-msdosdjgpp)
+	compiled by GNU C version 8.3.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version none
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 2a5af26b82a5bf85c8abd44544346166
+src/video.c: In function 'vid_setmode':
+src/video.c:28:3: error: unknown type name '__dpmi_regs'
+   28 |   __dpmi_regs r;
+      |   ^~~~~~~~~~~
+src/video.c:29:4: error: request for member 'x' in something not a structure or union
+   29 |   r.x.ax = mode;
+      |    ^
+src/video.c:30:3: warning: implicit declaration of function '__dpmi_int' [-Wimplicit-function-declaration]
+   30 |   __dpmi_int(0x10, &r);
+      |   ^~~~~~~~~~
+make: *** [Makefile:62: obj/video.o] Error 1

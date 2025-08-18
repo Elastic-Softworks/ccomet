@@ -1,0 +1,39 @@
+/*
+        ====================================
+
+                    V I D E O . H
+	      CCOMET VIDEO HEADER FILE
+           CG MOON / ELASTIC SOFTWORKS 2025
+  
+         ====================================
+*/
+
+
+#ifndef VIDEO_H
+#define VIDEO_H
+
+/*
+              ======================
+                 --- CONSTANTS ---
+              ======================
+*/
+
+#define VID_MODE_TEXT 0x03                  /* 80x25 16-COL TEXT MODE          */
+#define VID_MODE_13H  0x13                  /* 320x200 256 COL GFX MODE        */
+#define VGA_MEMBASE   0xA0000L              /* BASE ADDRESS OF VGA MEM IN 13h  */
+#define SCREEN_WIDTH  320                   /* WIDTH OF SCREEN (IN PIXELS)     */
+#define SCREEN_HEIGHT 200                   /* HEIGHT OF SCREEN (IN PIXELS)    */
+#define SCREEN_SIZE   (SCREEN_WIDTH * SCREEN_HEIGHT)
+
+/*
+              ======================
+                --- PROTOTYPES ---
+              ======================
+*/
+
+void vid_setmode(int mode);
+void vid_close(void);
+void vid_putpix(int x, int y, unsigned char color);
+void vid_present(void);
+
+#endif

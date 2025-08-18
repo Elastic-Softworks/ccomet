@@ -1,0 +1,90 @@
+==============================================================================
+                        CCOMET - DEVELOPMENT TASK LIST
+==============================================================================
+
+This document outlines the development phases for building the foundational
+components of the CCOMET game engine. Each phase builds upon the last.
+
+------------------------------------------------------------------------------
+ PHASE 1: PROJECT SETUP & BUILD SYSTEM
+------------------------------------------------------------------------------
+GOAL:     Establish a compilable project structure and a working Makefile.
+          The engine won't do anything yet, but it will build correctly.
+
+TASKS:
+  [X] 1. Create the core directory structure (src, include, lib, bin, etc).
+  [X] 2. Write the initial Makefile.
+        - Define compiler (djgcc) and flags (-std=c89).
+        - Rule to compile src/*.c into object files (*.o).
+        - Rule to archive object files into lib/CCOMET.LIB.
+        - Rule to compile and link the example program.
+        - Rule for 'clean' to remove build artifacts.
+  [X] 3. Create empty placeholder C files (video.c, input.h, etc.) so the
+         project compiles successfully.
+
+
+------------------------------------------------------------------------------
+ PHASE 2: CORE VIDEO ABSTRACTION
+------------------------------------------------------------------------------
+GOAL:     Get control of the screen and draw a pixel. This is the most
+          fundamental step.
+
+TASKS:
+  [X] 1. VGA Mode Handling:
+        - Implement vid_set_mode() for Mode 13h (320x200x256).
+        - Implement vid_close() to return to text mode.
+  [X] 2. Pixel Plotting:
+        - Implement vid_put_pixel(x, y, color) to draw directly to the
+          VGA memory buffer at address 0xA0000.
+  [ ] 3. Double Buffering:
+        - Create an off-screen buffer in memory (a simple char array).
+        - Update vid_put_pixel() to draw to this off-screen buffer.
+        - Implement vid_present() to copy the entire buffer to video memory
+          in one go for smooth, flicker-free animation.
+  [ ] 4. Palette Control:
+        - Implement vid_set_palette() to define the 256 available colors.
+
+
+------------------------------------------------------------------------------
+ PHASE 3: BASIC INPUT HANDLING
+------------------------------------------------------------------------------
+GOAL:     Read input from the keyboard.
+
+TASKS:
+  [ ] 1. Keyboard State Array:
+        - Create a global array to hold the state of all keyboard keys.
+  [ ] 2. Keyboard Polling:
+        - Implement inp_update_keyboard() to poll the keyboard hardware
+          ports and update the key state array.
+  [ ] 3. Key State Querying:
+        - Implement inp_is_key_down(scancode) to check the array.
+        - Implement inp_was_key_pressed(scancode) for single-press events.
+
+
+------------------------------------------------------------------------------
+ PHASE 4: FOUNDATIONAL 2D GRAPHICS
+------------------------------------------------------------------------------
+GOAL:     Create basic 2D drawing primitives using the pixel plotter.
+
+TASKS:
+  [ ] 1. Line Drawing:
+        - Implement vid_draw_line() using Bresenham's line algorithm.
+  [ ] 2. Basic Shapes:
+        - Implement vid_draw_rect() and vid_draw_filled_rect().
+        - (Optional) Implement vid_draw_circle().
+
+
+------------------------------------------------------------------------------
+ PHASE 5: INITIAL AUDIO STUBS
+------------------------------------------------------------------------------
+GOAL:     Create the basic API for sound and a simple test beep.
+
+TASKS:
+  [ ] 1. PC Speaker Beep:
+        - Implement aud_beep(frequency) to make a sound on the PC speaker.
+  [ ] 2. Sound Card API (Stubs):
+        - Define function signatures in audio.h for future sound card
+          support (e.g., aud_play_wav(), aud_load_voc()). These will be
+          empty functions for now to build out the API.
+
+==============================================================================

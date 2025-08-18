@@ -1,0 +1,22 @@
+COMPILING src/video.c
+i586-pc-msdosdjgpp-gcc -g -Wall -Iinclude -c src/video.c -o obj/video.o
+ARCHIVING LIBRARY lib/libccomet.a
+i586-pc-msdosdjgpp-ar rcs lib/libccomet.a obj/audio.o obj/input.o obj/video.o
+COMPILING AND LINKING EXAMPLE bin/ccomet_test.exe
+i586-pc-msdosdjgpp-gcc -g -Wall -Iinclude examples/main.c -o bin/ccomet_test.exe -Llib -lccomet
+examples/main.c: In function 'main':
+examples/main.c:8:3: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+    8 |   printf("\nSETTING MODE TO 13h...\n");
+      |   ^~~~~~
+examples/main.c:2:1: note: include '<stdio.h>' or provide a declaration of 'printf'
+    1 | #include <ccomet.h>
+  +++ |+#include <stdio.h>
+    2 | 
+examples/main.c:8:3: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]
+    8 |   printf("\nSETTING MODE TO 13h...\n");
+      |   ^~~~~~
+examples/main.c:8:3: note: include '<stdio.h>' or provide a declaration of 'printf'
+examples/main.c:13:3: warning: implicit declaration of function 'getchar' [-Wimplicit-function-declaration]
+   13 |   getchar();
+      |   ^~~~~~~
+examples/main.c:13:3: note: 'getchar' is defined in header '<stdio.h>'; did you forget to '#include <stdio.h>'?
