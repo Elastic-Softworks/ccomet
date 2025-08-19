@@ -1,0 +1,139 @@
+==============================================================================
+                  CCOMET - ADVANCED GRAPHICS ENGINE PLAN
+==============================================================================
+
+This document outlines the development plan for a sophisticated, VDP-based
+graphics engine for CCOMET. This plan supersedes the graphics-related tasks
+in the original `tasks.txt`.
+
+------------------------------------------------------------------------------
+ CORE ARCHITECTURE OVERVIEW
+------------------------------------------------------------------------------
+The engine will be built around a dual Video Display Processor (VDP) model,
+inspired by 32-bit era consoles, to allow for complex scene composition.
+
+- VDP1 (Sprite/Polygon Processor): Manages lists of drawing commands for
+  foreground elements like sprites and simple polygons. Renders to its own
+  buffer.
+- VDP2 (Background/Plane Processor): Manages multiple scrollable and
+  transformable background layers for parallax effects and rich scenery.
+- Final Compositor: Combines the VDP1 and VDP2 buffers, applies color
+  blending/dithering, and presents the final image to the screen.
+- Animation Engine: Manages keyframes, interpolation, and timing for all
+  animated properties.
+- Palette Manager: Manages multiple palettes and palette animations.
+
+------------------------------------------------------------------------------
+ PHASE A: FOUNDATIONAL 2D GRAPHICS & TIMING
+------------------------------------------------------------------------------
+GOAL:     Expand the basic drawing functions and establish a foundation for
+          smooth, timed animation.
+
+TASKS:
+  [ ] 1. Line Drawing: Implement `vid_draw_line()` using Bresenham's
+         line algorithm.
+  [ ] 2. Shape Drawing: Implement `vid_draw_rect()`, `vid_draw_filled_rect()`,
+         and `vid_draw_circle()`.
+  [ ] 3. Polygon Drawing: Implement `vid_draw_polygon()` for rendering filled,
+         convex polygons.
+  [ ] 4. High-Resolution Timer: Implement a timer using the Programmable
+         Interval Timer (PIT) for precise animation timing, independent of
+         CPU speed.
+  [ ] 5. VSync Synchronization: Implement `vid_wait_vsync()` to synchronize
+         `vid_present()` with the monitor's vertical blanking interval to
+         eliminate tearing and ensure smooth 60fps animation.
+
+------------------------------------------------------------------------------
+ PHASE B: ADVANCED PALETTE & COLOR MANAGEMENT
+------------------------------------------------------------------------------
+GOAL:     Create a robust system for managing color palettes and implementing
+          advanced color blending effects.
+
+TASKS:
+  [ ] 1. Palette Manager:
+        - Create a system to store and switch between multiple palettes.
+        - Implement `pal_load(palette_data)` and `pal_set_active(palette_id)`.
+        - Define file formats for palettes (e.g., JASC-PAL) and write
+          functions to load/save them.
+        - Create several default palettes (e.g., full-color, grayscale).
+  [ ] 2. Color Blending (Dithering):
+        - Implement Bayer (ordered) dithering for fast, pattern-based
+          blending.
+        - Implement Floyd-Steinberg (error-diffusion) dithering for
+          higher quality blending.
+        - Create a `vid_dither_blit()` function to apply these effects.
+  [ ] 3. Palette Animation: Implement functions to cycle or interpolate
+         colors within the active palette over time.
+
+------------------------------------------------------------------------------
+ PHASE C: VDP2 - ADVANCED BACKGROUNDS (MODE 7 STYLE)
+------------------------------------------------------------------------------
+GOAL:     Build the background plane processor for rich, multi-layered,
+          and dynamic backgrounds.
+
+TASKS:
+  [ ] 1. Layer System:
+        - Define data structures for tile-based background layers.
+        - Create a tilemap editor or use an existing one (e.g., Tiled) and
+          write an importer.
+  [ ] 2. Tilemap Renderer: Implement `vdp2_draw_layer()` to render a tilemap
+         to a dedicated VDP2 buffer.
+  [ ] 3. Scrolling: Implement horizontal and vertical scrolling for each
+         layer to create parallax effects.
+  [ ] 4. Affine Transformation (Mode 7): Implement rotation and scaling for a
+         background layer to achieve "Mode 7" style effects.
+
+------------------------------------------------------------------------------
+ PHASE D: VDP1 - SPRITES & 3D POLYGONS
+------------------------------------------------------------------------------
+GOAL:     Build the foreground processor for game objects and 3D graphics.
+
+TASKS:
+  [ ] 1. Sprite Engine:
+        - Define a data structure for sprites (position, size, image data).
+        - Implement `vdp1_draw_sprite()` to render sprites to the VDP1 buffer.
+        - (Optional) Add support for sprite scaling and rotation.
+  [ ] 2. 3D Math Library: Create a new module (`math3d.h`, `math3d.c`) for
+         vector and matrix operations (translation, rotation, projection).
+  [ ] 3. Wireframe 3D Rendering:
+        - Define data structures for 3D models (vertices, edges).
+        - Implement a rendering pipeline to transform, project, and draw
+          3D wireframe models using `vid_draw_line()`.
+  [ ] 4. Solid 3D Rendering:
+        - Extend the 3D model structure to include faces (polygons).
+        - Implement a 3D rasterizer to draw filled, flat-shaded polygons
+          using `vid_draw_polygon()`.
+        - (Optional) Add simple texture mapping capabilities.
+
+------------------------------------------------------------------------------
+ PHASE E: ANIMATION & FINAL COMPOSITION
+------------------------------------------------------------------------------
+GOAL:     Tie all rendering systems together with a flexible animation
+          engine and present the final composed frame.
+
+TASKS:
+  [ ] 1. Animation Engine:
+        - Define data structures for keyframes and animation tracks.
+        - Implement linear interpolation (lerp) for tweening properties
+          (position, rotation, color, etc.) over time.
+        - (Optional) Implement other easing functions (ease-in, ease-out).
+  [ ] 2. Final Compositor:
+        - Create a final composition buffer.
+        - Implement `vid_composite_frame()` to combine the VDP1 and VDP2
+          buffers, handling transparency and layer priority.
+        - Update `vid_present()` to copy the final composition buffer to the
+          screen, synchronized with VSync.
+
+------------------------------------------------------------------------------
+ PHASE F: DEMOS & INTEGRATION
+------------------------------------------------------------------------------
+GOAL:     Create a suite of demos to test and showcase each feature of the
+          new graphics engine.
+
+TASKS:
+  [ ] 1. Individual Demos: Create separate `.c` files in `examples/` for
+         each major feature (palettes, dithering, VDP2 scrolling, VDP2
+         Mode 7, VDP1 sprites, VDP1 3D, animation).
+  [ ] 2. Master Demo: Create a main demonstration program that showcases all
+         features and allows the user to cycle through them with key presses.
+==============================================================================

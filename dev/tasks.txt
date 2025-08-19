@@ -36,12 +36,12 @@ TASKS:
   [X] 2. Pixel Plotting:
         - Implement vid_put_pixel(x, y, color) to draw directly to the
           VGA memory buffer at address 0xA0000.
-  [ ] 3. Double Buffering:
+  [X] 3. Double Buffering:
         - Create an off-screen buffer in memory (a simple char array).
         - Update vid_put_pixel() to draw to this off-screen buffer.
         - Implement vid_present() to copy the entire buffer to video memory
           in one go for smooth, flicker-free animation.
-  [ ] 4. Palette Control:
+  [X] 4. Palette Control:
         - Implement vid_set_palette() to define the 256 available colors.
 
 

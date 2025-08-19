@@ -26,7 +26,7 @@ static unsigned char screen_buffer[SCREEN_SIZE];
 	      
 */
 
-void vid_setmode(int mode) {
+void vid_set_mode(int mode) {
 
   __dpmi_regs r;
   r.x.ax = mode;
@@ -34,8 +34,7 @@ void vid_setmode(int mode) {
 
   if (mode == VID_MODE_13H) {
 
-
-    if (mode == VID_MODE_13) {
+    if (mode == VID_MODE_13H) {
 
       memset(screen_buffer, 0, SCREEN_SIZE);
       
@@ -60,7 +59,7 @@ void vid_setmode(int mode) {
 
 void vid_close(void) {
 
-    vid_setmode(VID_MODE_TEXT);
+    vid_set_mode(VID_MODE_TEXT);
     
 }
 
@@ -112,4 +111,23 @@ void vid_present(void) {
   
 }
 
+/*
 
+                 vid_clearbuffer()
+		 ---
+		 Clears entire off-screen buffer
+		 to a single color (the BG in
+		 most instances) using memset()
+		 to fill the buffer with the color
+		 specified by whatever byte. 
+		 Typically, you'd want to call this
+		 at the beginning of each frame so
+		 as to erase the contents of the last
+		 frame.
+*/
+
+void vid_clearbuffer(unsigned char color) {
+
+  memset(screen_buffer, color, SCREEN_SIZE);
+  
+}

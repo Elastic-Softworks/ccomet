@@ -10,13 +10,15 @@ int main(int argc, char*argv[]) {
   printf("PRESS ENTER TO CONTINUE...\n");
 
   getchar();
-  
-  vid_setmode(VID_MODE_13H);
 
-  //vid_putpix(10, 10, 1);
-  //vid_putpix(20, 10, 2);
-  //vid_putpix(30, 10, 4);
-  //vid_putpix(160, 100, 15);
+  vid_clearbuffer(1);
+  
+  vid_set_mode(VID_MODE_13H);
+
+  vid_putpix(10, 10, 1);
+  vid_putpix(20, 10, 2);
+  vid_putpix(30, 10, 4);
+  vid_putpix(160, 100, 15);
 
   vid_present();
 

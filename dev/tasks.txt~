@@ -28,15 +28,15 @@ TASKS:
 ------------------------------------------------------------------------------
 GOAL:     Get control of the screen and draw a pixel. This is the most
           fundamental step.
-Ca
+
 TASKS:
   [X] 1. VGA Mode Handling:
         - Implement vid_set_mode() for Mode 13h (320x200x256).
         - Implement vid_close() to return to text mode.
-  [ ] 2. Pixel Plotting:
+  [X] 2. Pixel Plotting:
         - Implement vid_put_pixel(x, y, color) to draw directly to the
           VGA memory buffer at address 0xA0000.
-  [ ] 3. Double Buffering:
+  [X] 3. Double Buffering:
         - Create an off-screen buffer in memory (a simple char array).
         - Update vid_put_pixel() to draw to this off-screen buffer.
         - Implement vid_present() to copy the entire buffer to video memory

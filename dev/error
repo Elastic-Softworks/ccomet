@@ -1,0 +1,22 @@
+CLEANING UP...
+rm -rf obj lib bin/ccomet_test.exe
+COMPILING src/audio.c
+i586-pc-msdosdjgpp-gcc -g -Wall -Iinclude -c src/audio.c -o obj/audio.o
+COMPILING src/input.c
+i586-pc-msdosdjgpp-gcc -g -Wall -Iinclude -c src/input.c -o obj/input.o
+COMPILING src/video.c
+i586-pc-msdosdjgpp-gcc -g -Wall -Iinclude -c src/video.c -o obj/video.o
+src/video.c: In function 'vid_clearbuffer':
+src/video.c:129:1: error: number of arguments doesn't match prototype
+  129 | void vid_clearbuffer() {
+      | ^~~~
+In file included from include/ccomet.h:4,
+                 from src/video.c:14:
+include/video.h:38:6: error: prototype declaration
+   38 | void vid_clearbuffer(unsigned char color);
+      |      ^~~~~~~~~~~~~~~
+src/video.c:131:25: error: 'color' undeclared (first use in this function)
+  131 |   memset(screen_buffer, color, SCREEN_SIZE);
+      |                         ^~~~~
+src/video.c:131:25: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Makefile:62: obj/video.o] Error 1
