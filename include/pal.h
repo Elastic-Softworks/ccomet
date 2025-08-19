@@ -1,8 +1,8 @@
 /*
         ====================================
 
-                   C C O M E T . H
-	            CCOMET PRIMARY HEADER FILE
+                      P A L . H
+	            CCOMET PALETTE HEADER FILE
            CG MOON / ELASTIC SOFTWORKS 2025
   
          ====================================
@@ -27,11 +27,17 @@
  */
 ```
 
-#ifndef CCOMET_H
-#define CCOMET_H
+#ifndef  PAL_H
+#define  PAL_H
 
 #include "video.h"
-#include "input.h"
-#include "audio.h"
+
+static RGB default_vga_pal[16] = {
+
+     {0, 0, 0},  {0, 0, 170},   {0, 170, 0},   {0, 170, 170},
+   {170, 0, 0},  {170, 0, 170}, {170, 85, 0},  {170, 170, 170}, 
+   {85, 85, 85}, {85, 85, 255}, {85, 255, 85}, {255, 255, 255}
+  
+};
 
 #endif

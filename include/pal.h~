@@ -1,0 +1,10 @@
+#ifndef  PAL_H
+#define  PAL_H
+
+#include "video.h"
+
+static RGB default_vga_pal[16] = {
+
+  {0, 0, 0}
+  
+}

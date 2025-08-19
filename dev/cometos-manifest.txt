@@ -1,0 +1,53 @@
+# The ELASTIC SOFTWORKS Manifesto
+## Project CCOMET, CNOVA, and CometOS
+
+**Version 1.0**
+**License: GNU General Public License v3.0**
+
+---
+
+###  Mission Statement
+
+Our mission is to create a complete, modern, and open-source software ecosystem with the sensibilities and creative spirit of the 1990s, built upon the foundation of DOS. Through three core projects—**CCOMET**, **CNOVA**, and **CometOS**—we aim to provide a powerful, transparent, and enjoyable platform for developers, creators, and enthusiasts who appreciate the elegance and direct hardware control of classic computing environments.
+
+---
+
+
+---
+
+### The Projects: A Three-Pillar Ecosystem
+
+Our vision is realized through three interconnected projects, each with a distinct purpose:
+
+#### 3.1. CCOMET: The Creative Engine
+- **Purpose:** A feature-rich, high-performance game and multimedia engine.
+- **Functionality:** CCOMET will provide a complete suite of tools for creating 2D and 3D games, animations, and graphical applications. This includes an advanced dual VDP graphics renderer, a robust input handling system, and a flexible audio engine. CCOMET is the "what you see and hear" layer of our ecosystem.
+
+#### 3.2. CNOVA: The System Foundation
+- **Purpose:** A comprehensive, low-level C library for system-level programming.
+- **Functionality:** CNOVA will provide the fundamental building blocks that an operating system requires. This includes functions for memory management, process and thread scheduling, filesystem interaction, device driver interfaces, and hardware abstraction. CNOVA is the "how it works" layer, providing the foundational power for CometOS.
+
+#### 3.3. CometOS: The Operating System
+- **Purpose:** A modern, DOS-based operating system with a 1990s aesthetic and philosophy.
+- **Functionality:** CometOS (or C-OS) will be the culmination of our efforts, integrating CCOMET and CNOVA into a cohesive, user-facing operating environment. It will feature a graphical user interface (GUI), a command-line interface (CLI), a robust multitasking kernel, and a suite of system utilities and applications. It will be designed to run flawlessly in emulated environments like DOSBox and, crucially, 86Box, allowing for extensive hardware compatibility testing and specialization.
+
+---
+
+### 4. Technical Vision & Principles
+
+- **Target Environment:** The primary target is the DOS environment, with a strong focus on compatibility with emulators. **86Box** will be a key development and testing tool, allowing us to emulate a wide variety of IBM-compatible PC hardware and create specialized builds of CometOS for different machine profiles.
+- **Programming Language:** C (primarily C89/C99 for maximum compatibility and control), with potential for assembly language in performance-critical areas.
+- **Modularity:** CCOMET and CNOVA will be developed as independent, linkable libraries, allowing developers to use them separately or together.
+- **Open Source:** All three projects will be licensed under the GNU General Public License (GPL) to encourage community involvement, collaboration, and freedom.
+- **Documentation:** A commitment to clear, comprehensive technical documentation is paramount to the success and usability of the ecosystem.
+
+---
+
+### 5. High-Level Roadmap
+
+The development will proceed in distinct, sequential phases:
+
+- **Phase 1: CCOMET Engine Development.** Complete the development of the CCOMET graphics, input, and audio engine as a standalone library. This is the current, active phase.
+- **Phase 2: CNOVA Library Development.** Develop the CNOVA system library, providing the core OS functionalities.
+- **Phase 3: CometOS Integration & Development.** Begin the development of CometOS, integrating CCOMET for the user interface and CNOVA for the kernel and system functions.
+- **Phase 4: Ecosystem Growth.** Foster a community around the projects, encouraging the development of third-party applications, games, and utilities for CometOS.
