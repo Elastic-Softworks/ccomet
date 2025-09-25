@@ -8,7 +8,6 @@
          ====================================
 */
 
-```c
 /* CCOMET - OPEN-SOURCE GAME AND VISUAL ENGINE FOR DOS COMPATIBLES
  * Copyright (C) 2025  CG MOON / ELASTIC SOFTWORKS
  *
@@ -25,7 +24,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-```
+
 
 #ifndef CCOMET_H
 #define CCOMET_H

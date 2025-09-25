@@ -30,7 +30,7 @@ GOAL:     Expand the basic drawing functions and establish a foundation for
           smooth, timed animation.
 
 TASKS:
-  [ ] 1. Line Drawing: Implement `vid_draw_line()` using Bresenham's
+  [X] 1. Line Drawing: Implement `vid_draw_line()` using Bresenham's
          line algorithm.
   [ ] 2. Shape Drawing: Implement `vid_draw_rect()`, `vid_draw_filled_rect()`,
          and `vid_draw_circle()`.

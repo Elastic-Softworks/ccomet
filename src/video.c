@@ -8,7 +8,6 @@
         ====================================
 */
 
-```c
 /* CCOMET - OPEN-SOURCE GAME AND VISUAL ENGINE FOR DOS COMPATIBLES
  * Copyright (C) 2025  CG MOON / ELASTIC SOFTWORKS
  *
@@ -25,7 +24,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-```
 
 #include <dpmi.h>
 #include <string.h>
@@ -183,7 +181,7 @@ void vid_set_pal(const RGB *palette) {
     
     outp(0x3C9, palette[i].r >> 2);
     outp(0x3C9, palette[i].g >> 2);
-    outp(0x3C9, palette[i].b >> 2);   /* and finally scale the 8-bit
+    outp(0x3C9, palette[i].b >> 2);                                  /* and finally scale the 8-bit
 				         				 values down to 6-bit so it
 				         			     fits nice n snug in VGA   */
     
@@ -257,7 +255,7 @@ void vid_draw_line(int x1, int y1, int x2, int y2, unsigned char color) {
 
 /*
 
-                 vid_draw_rect()
+                              vid_draw_rect()
 				 ---
 				 Draws the outline of a rectangle
 				 using whatever color is specified.
@@ -265,18 +263,43 @@ void vid_draw_line(int x1, int y1, int x2, int y2, unsigned char color) {
 				 upon vid_draw_line() four times to
 				 accomplish its rectangle drawing goal.
   
-*/ 
+*/
+
+void vid_draw_rect(int x, int y, int width, int height, unsigned char color) {
+
+  /* draw the four sides of the rect */
+
+  vid_draw_line(x, y, x + width - 1, y, color);                             /* top */
+  vid_draw_line(x + width - 1, y, x + width - 1, y + height - 1, color);    /* right */
+  vid_draw_line(x + width - 1, y + height - 1, x, y + height - 1, color);   /* bottom */
+  vid_draw_line(x, y + height - 1, x, y, color);                            /* left */
+  
+}
 
 /*
 
-                 vid_draw_rect_fill()
+                             vid_draw_rect_fill()
 				 ---
 				 Same as above, only now the rectangle
 				 has the (_fill) tag and as with any
 				 (_draw) func ending with a (_fill) tag
 				 it will draw this rectangle full up.
   
-*/ 
+*/
+
+void vid_draw_rect_fill(int x, int y, int width, int height, unsigned char color) {
+
+  int i;
+
+  /* fill the rect by drawing a buncha horizontal lines */
+
+  for (i = 0; i < height; i++) {
+
+    vid_draw_line(x, y + i, x + width - 1, y + i, color);
+    
+  }
+  
+}
 
 /* TODO : REMOVE (_FILL) AND MAKE A FUNC EXCLUSIVELY FOR
           FILLING SHAPES SO THAT WE DON'T HAVE TO MAKE A
@@ -293,4 +316,50 @@ void vid_draw_line(int x1, int y1, int x2, int y2, unsigned char color) {
 				 it uses the Midpoint Circle Algorithm for
 				 efficient, inter-only calculations.
   
-*/ 
+*/
+
+void vid_draw_circle(int cX, int cY, int rad, unsigned char color) {
+
+  int x = 0;
+  int y = rad;
+  int d = 1 - rad;
+
+  vid_draw_px(cX + x, cY + y, color);
+  vid_draw_px(cX - x, cY + y, color);
+  vid_draw_px(cX + x, cY - y, color);
+  vid_draw_px(cX - x, cY - y, color);
+  vid_draw_px(cX + y, cY + x, color);
+  vid_draw_px(cX - y, cY + x, color);
+  vid_draw_px(cX + y, cY - x, color);
+  vid_draw_px(cX - y, cY - x, color);
+
+  while (x < y) {
+
+    if (d < 0) {
+
+      d = d + 2 * x + 3;
+      
+    } else {
+
+      d = d + 2 * (x - y) + 5;
+
+      y--;
+      
+    }
+
+    x++;
+
+    /* draw 8-way symmetric points */
+
+    vid_draw_px(cX + x, cY + y, color);
+    vid_draw_px(cX - x, cY + y, color);
+    vid_draw_px(cX + x, cY - y, color);
+    vid_draw_px(cX - x, cY - y, color);
+    vid_draw_px(cX + y, cY + x, color);
+    vid_draw_px(cX - y, cY + x, color);
+    vid_draw_px(cX + y, cY - x, color);
+    vid_draw_px(cX - y, cY - x, color);
+    
+  }
+  
+}

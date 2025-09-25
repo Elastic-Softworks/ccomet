@@ -68,6 +68,22 @@ int main(int argc, char*argv[]) {
     /* timerrrrrrrrrr                 */
     
   }
+
+  /* --- SHAPE DEMO --- */
+
+  vid_clear_buffer(0);
+
+  vid_draw_rect(50, 50, 100, 75, 15);
+  vid_draw_rect_fill(200, 30, 80, 40, 4);
+  vid_draw_circle(160, 130, 30, 2);
+
+  vid_present();
+
+  for (j = 0; j < 100000000; j++) {
+
+    /* timer */
+    
+  }
   
   /* --- DEMO CLOSE ---               */
   
