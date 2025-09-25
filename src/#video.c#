@@ -402,7 +402,20 @@ void vid_draw_polygon(const int *vertices, int num_vertices, unsigned char color
 
   /* clip to screen bounds */
 
-  int (min_y < 0) min_y = 0;
+  int (min_y < 0CLEANING UP...
+rm -rf obj lib bin/ccomet_test.exe
+COMPILING src/audio.c
+i586-pc-msdosdjgpp-gcc -g -Wall -Iinclude -c src/audio.c -o obj/audio.o
+COMPILING src/input.c
+i586-pc-msdosdjgpp-gcc -g -Wall -Iinclude -c src/input.c -o obj/input.o
+COMPILING src/video.c
+i586-pc-msdosdjgpp-gcc -g -Wall -Iinclude -c src/video.c -o obj/video.o
+src/video.c: In function 'vid_draw_polygon':
+src/video.c:405:13: error: expected ')' before '<' token
+  405 |   int (min_y < 0) min_y = 0;
+      |             ^~
+      |             )
+make: *** [Makefile:62: obj/video.o] Error 1) min_y = 0;
   
   if (max_y >= SCREEN_HEIGHT) max_y = SCREEN_HEIGHT - 1;
 

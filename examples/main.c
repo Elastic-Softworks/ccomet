@@ -84,6 +84,52 @@ int main(int argc, char*argv[]) {
     /* timer */
     
   }
+
+  /* --- POLYGON DEMO --- */
+
+  vid_clear_buffer(0);
+
+  int triangle[] = {
+
+    160, 50,
+    100, 150,
+    220, 150
+    
+  };
+
+  vid_draw_polygon(triangle, 3, 4);
+
+  int diamond[] = {
+
+    50, 100,
+    100, 50,
+    150, 100,
+    100, 150
+    
+  };
+
+  vid_draw_polygon(diamond, 4, 2);
+
+  int pentagon[] = {
+
+    280, 70,
+    310, 100,
+    295, 140,
+    265, 140,
+    250, 100
+    
+  };
+
+  vid_draw_polygon(pentagon, 5, 3);
+
+  vid_present();
+
+  
+  for (j = 0; j < 100000000; j++) {
+
+    /* timer */
+    
+  }
   
   /* --- DEMO CLOSE ---               */
   

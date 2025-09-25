@@ -361,5 +361,123 @@ void vid_draw_circle(int cX, int cY, int rad, unsigned char color) {
     vid_draw_px(cX - y, cY - x, color);
     
   }
+
+}
+
+/*
+
+    vid_draw_polygon()
+      ---
+    renders a filled convex polygon using a
+    scanline algorithm. vertices[] should
+    contain x,y pairs: [x1, y1, x2, y2, x3, y3,...]
+    num_vertices is the number of vertex
+    points (and NOT coordinate pairs!)
   
+ */
+
+void vid_draw_polygon(const int *vertices, int num_vertices, unsigned char color) {
+
+  int i, j, y, min_y, max_y;
+  int intersections[64];
+  int intersection_count;
+  int vertex_y, x1, y1, x2, y2, x_intersect, temp;
+
+  /* need at least 3 vertices for a polygon to happen */
+  
+  if (num_vertices < 3) return;
+
+  /* find the Y bounds of the polygon */
+
+  min_y = max_y = vertices[1]; /* first y coordinate */
+
+  for (i = 1; i < num_vertices; i++) {
+
+    vertex_y = vertices[i * 2 + 1];
+
+    if (vertex_y < min_y) min_y = vertex_y;
+    if (vertex_y > max_y) max_y = vertex_y;
+    
+  }
+
+  /* clip to screen bounds */
+
+  if (min_y < 0) min_y = 0;
+  
+  if (max_y >= SCREEN_HEIGHT) max_y = SCREEN_HEIGHT - 1;
+
+  /* for each scanline */
+
+  for (y = min_y; y <= max_y; y++) {
+
+    intersection_count = 0;
+
+    /* find intersections w all edges */
+
+    for (i = 0; i < num_vertices; i++) {
+
+      j = (i + 1) % num_vertices;
+
+      x1 = vertices[i * 2];
+      y1 = vertices[i * 2 + 1];
+      x2 = vertices[j * 2];
+      y2 = vertices[j * 2 + 1];
+
+      /* check if scanline intersects this edge */
+
+      if ((y1 <= y && y < y2) || (y2 <= y && y < y1)) {
+
+	/* calculate intersection point */
+
+	if (y1 != y2) {    /* avoids dividing by zero lol dont want that */
+
+	  x_intersect = x1 + (y - y1) * (x2 - x1) / (y2 - y1);
+
+	  /* store intersection if within the screen boundaries */
+
+	  if (x_intersect >= 0 && x_intersect < SCREEN_WIDTH &&
+	      intersection_count < 64) {
+
+	    intersections[intersection_count++] = x_intersect;
+	    
+	  }
+	  
+	}
+	
+      }
+      
+    }
+
+    /* sort intersections (bubble sort for small arrays) */
+
+    for (i = 0; i < intersection_count - 1; i++) {
+
+      for (j = 0; j < intersection_count - i - 1; j++) {
+
+	if (intersections[j] > intersections[j+1]) {
+
+	  temp = intersections[j];
+	  intersections[j] = intersections[j + 1];
+	  intersections[j + 1] = temp;
+	  
+	}
+	
+      }
+      
+    }
+
+    /* fill between pairs of intersections */
+
+    for (i = 0; i < intersection_count; i += 2) {
+
+      if (i + 1 < intersection_count) {
+
+	vid_draw_line(intersections[i], y, intersections[i + 1], y, color);
+	
+      }
+      
+    }
+    
+  }
+ 
 }
