@@ -1,5 +1,6 @@
 #include  <ccomet.h>
 #include  <stdio.h>
+#include  <conio.h>
 #include  "pal.h"
 
 int main(int argc, char*argv[]) {
@@ -8,131 +9,140 @@ int main(int argc, char*argv[]) {
   (void)argv;
 
   printf("\nSETTING MODE TO 13h...\n");
+  printf("PRESS ESC TO EXIT DURING DEMO...\n");
   printf("PRESS ENTER TO CONTINUE...\n");
 
   getchar();
+
+  timer_init();
   
   vid_set_mode(VID_MODE_13H);
 
-  /* --- PIXEL DEMO ---             */
-
-  RGB _grayscale_pal[256];
-
-  int i;
-
-  for (i = 0; i < 256; i++) {
-
-    _grayscale_pal[i].r = i;
-    _grayscale_pal[i].g = i;
-    _grayscale_pal[i].b = i;
-    
-  }
-
-  vid_set_pal(_grayscale_pal);
+  /*  demo loop - runs until ESC is pressed */
   
-  vid_clear_buffer(64);
+  while (1) {
 
-  vid_draw_px(10, 10, 0);
-  vid_draw_px(20, 10, 128);
-  vid_draw_px(30, 10, 255);
-  
-  vid_present();
+    /* --- PIXEL DEMO ---             */
 
-  long j;
+    RGB _grayscale_pal[256];
 
-  /* TODO : MAKE A TIMER FUNCTION SO I DON'T
-            HAVE TO DO THIS SHIT EVERY TIME LOL */
-  
-  for (j = 0; j < 100000000; j++) {
+    int i;
 
-    /* just a timer nothin to see here
-       just some fuckin pixels lol    */
+    for (i = 0; i < 256; i++) {
+
+      _grayscale_pal[i].r = i;
+      _grayscale_pal[i].g = i;
+      _grayscale_pal[i].b = i;
+      
+    }
+
+    vid_set_pal(_grayscale_pal);
     
-  }
+    vid_clear_buffer(64);
 
-  /* --- LINE DEMO ---                */
-
-  vid_set_pal(default_vga_pal);
-  
-  vid_clear_buffer(0);
-
-  vid_draw_line(0,    0,  319,  199, 15);
-  vid_draw_line(319,  0,    0,  199,  1);
-  vid_draw_line(160, 10,  160,  190,  2);
-  vid_draw_line(10,  100, 310,  100,  4);
-
-  vid_present();
-
-  for  (j = 0; j < 100000000; j++) {
-
-    /* timerrrrrrrrrr                 */
+    vid_draw_px(10, 10, 0);
+    vid_draw_px(20, 10, 128);
+    vid_draw_px(30, 10, 255);
     
-  }
+    vid_present();
 
-  /* --- SHAPE DEMO --- */
+    timer_wait_frame();
 
-  vid_clear_buffer(0);
-
-  vid_draw_rect(50, 50, 100, 75, 15);
-  vid_draw_rect_fill(200, 30, 80, 40, 4);
-  vid_draw_circle(160, 130, 30, 2);
-
-  vid_present();
-
-  for (j = 0; j < 100000000; j++) {
-
-    /* timer */
+    /* check for ESC key */
     
-  }
+    if (kbhit() && getch() == 27) break;
 
-  /* --- POLYGON DEMO --- */
+    /* --- LINE DEMO --- */
 
-  vid_clear_buffer(0);
-
-  int triangle[] = {
-
-    160, 50,
-    100, 150,
-    220, 150
+    vid_set_pal(default_vga_pal);
     
-  };
+    vid_clear_buffer(0);
 
-  vid_draw_polygon(triangle, 3, 4);
+    vid_draw_line(0,    0,  319,  199, 15);
+    vid_draw_line(319,  0,    0,  199,  1);
+    vid_draw_line(160, 10,  160,  190,  2);
+    vid_draw_line(10,  100, 310,  100,  4);
 
-  int diamond[] = {
+    vid_present();
 
-    50, 100,
-    100, 50,
-    150, 100,
-    100, 150
+    timer_wait_frame();
+
+    /* check for ESC key */
     
-  };
-
-  vid_draw_polygon(diamond, 4, 2);
-
-  int pentagon[] = {
-
-    280, 70,
-    310, 100,
-    295, 140,
-    265, 140,
-    250, 100
+    if (kbhit() && getch() == 27) break;
     
-  };
+    /* --- SHAPE DEMO --- */
 
-  vid_draw_polygon(pentagon, 5, 3);
+    vid_clear_buffer(0);
 
-  vid_present();
+    vid_draw_rect(50, 50, 100, 75, 15);
+    vid_draw_rect_fill(200, 30, 80, 40, 4);
+    vid_draw_circle(160, 130, 30, 2);
 
-  
-  for (j = 0; j < 100000000; j++) {
+    vid_present();
 
-    /* timer */
+    timer_wait_frame();
+
+    /* check for ESC key */
     
-  }
+    if (kbhit() && getch() == 27) break;
+
+    /* --- POLYGON DEMO --- */
+
+    vid_clear_buffer(0);
+
+    {
+      int triangle[] = {
+
+        160, 50,
+        100, 150,
+        220, 150
+        
+      };
+
+      vid_draw_polygon(triangle, 3, 4);
+    }
+
+    {
+      int diamond[] = {
+
+        50, 100,
+        100, 50,
+        150, 100,
+        100, 150
+        
+      };
+
+      vid_draw_polygon(diamond, 4, 2);
+    }
+
+    {
+      int pentagon[] = {
+
+        280, 70,
+        310, 100,
+        295, 140,
+        265, 140,
+        250, 100
+        
+      };
+
+      vid_draw_polygon(pentagon, 5, 3);
+    }
+
+    vid_present();
+
+    timer_wait_frame();
+
+    /* check for ESC key */
+    
+    if (kbhit() && getch() == 27) break;
+
+  } 
   
   /* --- DEMO CLOSE ---               */
-  
+
+  timer_close();
   vid_close();
 
   printf("WELCOME BACK TO TEXT MODE...!");

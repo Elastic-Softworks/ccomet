@@ -1,0 +1,78 @@
+CLEANING UP...
+rm -rf obj lib bin/ccomet_test.exe
+COMPILING src/audio.c
+i586-pc-msdosdjgpp-gcc -g -Wall -Iinclude -c src/audio.c -o obj/audio.o
+COMPILING src/input.c
+i586-pc-msdosdjgpp-gcc -g -Wall -Iinclude -c src/input.c -o obj/input.o
+COMPILING src/timer.c
+i586-pc-msdosdjgpp-gcc -g -Wall -Iinclude -c src/timer.c -o obj/timer.o
+COMPILING src/video.c
+i586-pc-msdosdjgpp-gcc -g -Wall -Iinclude -c src/video.c -o obj/video.o
+ARCHIVING LIBRARY lib/libccomet.a
+i586-pc-msdosdjgpp-ar rcs lib/libccomet.a obj/audio.o obj/input.o obj/timer.o obj/video.o
+COMPILING AND LINKING EXAMPLE bin/ccomet_test.exe
+i586-pc-msdosdjgpp-gcc -g -Wall -Iinclude examples/main.c -o bin/ccomet_test.exe -Llib -lccomet
+examples/main.c: In function 'main':
+examples/main.c:41:8: warning: unused variable 'j' [-Wunused-variable]
+   41 |   long j;
+      |        ^
+examples/main.c: At top level:
+examples/main.c:76:20: error: expected declaration specifiers or '...' before numeric constant
+   76 |   vid_clear_buffer(0);
+      |                    ^
+examples/main.c:86:29: error: expected ')' before numeric constant
+   86 |   vid_draw_polygon(triangle, 3, 4);
+      |                             ^~
+      |                             )
+examples/main.c:97:28: error: expected ')' before numeric constant
+   97 |   vid_draw_polygon(diamond, 4, 2);
+      |                            ^~
+      |                            )
+examples/main.c:109:29: error: expected ')' before numeric constant
+  109 |   vid_draw_polygon(pentagon, 5, 3);
+      |                             ^~
+      |                             )
+examples/main.c:111:3: warning: data definition has no type or storage class
+  111 |   vid_present();
+      |   ^~~~~~~~~~~
+examples/main.c:111:3: warning: type defaults to 'int' in declaration of 'vid_present' [-Wimplicit-int]
+examples/main.c:111:3: error: conflicting types for 'vid_present'; have 'int()'
+In file included from include/ccomet.h:32,
+                 from examples/main.c:1:
+include/video.h:67:6: note: previous declaration of 'vid_present' with type 'void(void)'
+   67 | void vid_present(void);
+      |      ^~~~~~~~~~~
+examples/main.c:113:3: warning: data definition has no type or storage class
+  113 |   timer_wait_frame();
+      |   ^~~~~~~~~~~~~~~~
+examples/main.c:113:3: warning: type defaults to 'int' in declaration of 'timer_wait_frame' [-Wimplicit-int]
+examples/main.c:113:3: error: conflicting types for 'timer_wait_frame'; have 'int()'
+In file included from include/ccomet.h:35:
+include/timer.h:33:6: note: previous declaration of 'timer_wait_frame' with type 'void(void)'
+   33 | void timer_wait_frame(void);
+      |      ^~~~~~~~~~~~~~~~
+examples/main.c:115:1: error: expected identifier or '(' before '}' token
+  115 | }
+      | ^
+examples/main.c:119:3: warning: return type defaults to 'int' [-Wimplicit-int]
+  119 |   timer_close()
+      |   ^~~~~~~~~~~
+examples/main.c:119:3: warning: conflicting types for 'timer_close'
+include/timer.h:30:6: note: previous declaration of 'timer_close' with type 'void(void)'
+   30 | void timer_close(void);
+      |      ^~~~~~~~~~~
+examples/main.c: In function 'timer_close':
+examples/main.c:120:3: error: expected declaration specifiers before 'vid_close'
+  120 |   vid_close();
+      |   ^~~~~~~~~
+examples/main.c:122:3: error: expected declaration specifiers before 'printf'
+  122 |   printf("WELCOME BACK TO TEXT MODE...!");
+      |   ^~~~~~
+examples/main.c:124:3: error: expected declaration specifiers before 'return'
+  124 |   return 0;
+      |   ^~~~~~
+examples/main.c:126:1: error: expected declaration specifiers before '}' token
+  126 | }
+      | ^
+examples/main.c:128: error: expected '{' at end of input
+make: *** [Makefile:67: bin/ccomet_test.exe] Error 1

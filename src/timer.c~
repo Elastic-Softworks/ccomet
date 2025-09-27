@@ -1,0 +1,104 @@
+/* 
+        ====================================
+
+                    T I M E R . C
+	         CCOMET TIMER FILE
+           CG MOON / ELASTIC SOFTWORKS 2025
+  
+        ====================================
+*/
+
+#include <dos.h>
+#include <time.h>
+#include <unistd.h>
+#include "timer.h"
+
+static clock_t start_time;
+static unsigned long frame_duration;
+
+/*
+
+          timer_init()
+          ---
+          Initialize simple timer using DOS clock
+  
+*/
+
+void timer_init(void) {
+
+  start_time = clock();
+  frame_duration = CLOCKS_PER_SEC / TARGET_FPS;
+  
+}
+
+/*
+
+         timer_close()
+         ---
+         Clean up timer resources
+  
+*/
+
+void timer_close(void) {
+
+  /* Nothing to clean up for simple timer */
+  
+}
+
+/*
+
+           timer_get_ticks()
+	   ---
+	   Get current clock ticks since init
+  
+ */
+
+unsigned long timer_get_ticks(void) {
+
+  return (unsigned long)(clock() - start_time);
+  
+}
+
+/*
+
+           timer_wait()
+	   ---
+	   Wait for specified number of milliseconds
+  
+*/
+
+void timer_wait(unsigned long ticks) {
+
+  clock_t end_time;
+  
+  end_time = clock() + (clock_t)ticks;
+  
+  while (clock() < end_time) {
+    /* wait */
+  }
+  
+}
+
+/*
+
+           timer_wait_frame()
+	   ---
+	   Wait for one frame duration (1/60th second)
+  
+*/
+
+void timer_wait_frame(void) {
+
+  clock_t end_time;
+  
+  end_time = clock() + CLOCKS_PER_SEC;
+  
+  while (clock() < end_time) {
+    
+    /* wait */
+    
+  }
+  
+}
+
+  

@@ -36,7 +36,7 @@ TASKS:
          and `vid_draw_circle()`.
   [X] 3. Polygon Drawing: Implement `vid_draw_polygon()` for rendering filled,
          convex polygons.
-  [ ] 4. High-Resolution Timer: Implement a timer using the Programmable
+  [X] 4. High-Resolution Timer: Implement a timer using the Programmable
          Interval Timer (PIT) for precise animation timing, independent of
          CPU speed.
   [ ] 5. VSync Synchronization: Implement `vid_wait_vsync()` to synchronize

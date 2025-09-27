@@ -32,5 +32,6 @@
 #include "video.h"
 #include "input.h"
 #include "audio.h"
+#include "timer.h"
 
 #endif

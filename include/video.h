@@ -2,7 +2,7 @@
         ====================================
 
                     V I D E O . H
-	            CCOMET VIDEO HEADER FILE
+	      CCOMET VIDEO HEADER FILE
            CG MOON / ELASTIC SOFTWORKS 2025
   
          ====================================
@@ -73,5 +73,6 @@ void vid_draw_rect(int x, int y, int width, int height, unsigned char color);
 void vid_draw_rect_fill(int x, int y, int width, int height, unsigned char color);
 void vid_draw_circle(int cX, int cY, int rad, unsigned char color);
 void vid_draw_polygon(const int *vertices, int num_vertices, unsigned char color);
+void vid_wait_vsync(void);
 
 #endif

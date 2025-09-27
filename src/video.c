@@ -127,6 +127,8 @@ void vid_draw_px(int x, int y, unsigned char color) {
 void vid_present(void) {
 
   dosmemput(screen_buffer, SCREEN_SIZE, VGA_MEMBASE);
+
+  vid_wait_vsync();
   
 }
 
@@ -480,4 +482,24 @@ void vid_draw_polygon(const int *vertices, int num_vertices, unsigned char color
     
   }
  
+}
+
+void vid_wait_vsync(void) {
+
+  /* wait for any ongoing retrace to end */
+
+  while (inp(0x3DA) & 0x08) {
+
+    /* wait */
+    
+  }
+
+  /* wait for next retrace */
+
+  while (!(inp(0x3DA) & 0x08)) {
+
+    /* wait */
+    
+  }
+  
 }

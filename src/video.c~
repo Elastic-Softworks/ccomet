@@ -402,7 +402,7 @@ void vid_draw_polygon(const int *vertices, int num_vertices, unsigned char color
 
   /* clip to screen bounds */
 
-  int (min_y < 0) min_y = 0;
+  if (min_y < 0) min_y = 0;
   
   if (max_y >= SCREEN_HEIGHT) max_y = SCREEN_HEIGHT - 1;
 
@@ -470,7 +470,7 @@ void vid_draw_polygon(const int *vertices, int num_vertices, unsigned char color
 
     for (i = 0; i < intersection_count; i += 2) {
 
-      if (i + i < intersection_count) {
+      if (i + 1 < intersection_count) {
 
 	vid_draw_line(intersections[i], y, intersections[i + 1], y, color);
 	
@@ -481,3 +481,12 @@ void vid_draw_polygon(const int *vertices, int num_vertices, unsigned char color
   }
  
 }
+
+/*
+
+         vid_wait_vsync()
+	 ---
+	 Waits for vertical retrace
+	 to eliminate screen tearing
+  
+ */
