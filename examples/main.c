@@ -152,6 +152,50 @@ int main(int argc, char*argv[]) {
         }
 
       }
+
+    }
+
+    vid_present();
+    timer_wait_frame();
+
+    if (kbhit() && getch() == 27) break;
+
+    /* --- DOOM PALETTE TEST --- */
+
+    pal_set_active(4);
+
+    vid_clear_buffer(0);
+    
+    /* 16x16 grid showing all 256 DOOM colors */
+
+    {
+      int   color, x, y, grid_x, grid_y;
+
+      int   square_size   = 12;      /* 12x12 pixels make a square */
+      int   start_x       = 16;      /* 16 px padding from right */
+      int   start_y       = 8;       /* 8 px padding from top */
+      
+      for (color = 0; color < 256; color++) {
+
+        grid_x  = color % 16;           /* 16 colors per row */
+        grid_y  = color / 16;           /* 16 rows total */
+        
+        x   = start_x + (grid_x * square_size);
+        y   = start_y + (grid_y * square_size);
+        
+        /* draw filled rectangle for this color */
+
+        vid_draw_rect_fill(x, y, square_size, square_size, color);
+        
+        /* draw a thin border around each square for visibility */
+
+        if (color != 0) {  
+
+          vid_draw_rect(x, y, square_size, square_size, 15); 
+
+        }
+
+      }
       
     }
 

@@ -81,6 +81,7 @@ extern	    RGB	pal_vga[256];
 extern	    RGB	pal_gray[256];
 extern	    RGB	pal_sepia[256];
 extern	    RGB	pal_win256[256];
+extern	    RGB	pal_doom[256];
 
 #endif
 
