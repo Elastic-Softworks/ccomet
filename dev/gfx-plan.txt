@@ -50,7 +50,7 @@ GOAL:     Create a robust system for managing color palettes and implementing
           advanced color blending effects.
 
 TASKS:
-  [ ] 1. Palette Manager:
+  [X] 1. Palette Manager:
         - Create a system to store and switch between multiple palettes.
         - Implement `pal_load(palette_data)` and `pal_set_active(palette_id)`.
         - Define file formats for palettes (e.g., JASC-PAL) and write

@@ -43,7 +43,7 @@ OBJECTS		= $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SOURCES))
 
 #	--- COMPILE EXAMPLE PROGRAMS ---
 
-EXAMPLE_SRC	= examples/main.c
+EXAMPLE_SRC	= examples/demo.c
 EXAMPLE_EXE	= ccomet_test.exe
 TARGET_EXE	= $(BINDIR)/$(EXAMPLE_EXE)
 

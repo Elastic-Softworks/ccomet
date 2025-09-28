@@ -42,6 +42,11 @@
 
 #define SCREEN_SIZE   (SCREEN_WIDTH * SCREEN_HEIGHT)
 
+/* dithering method constants */
+
+#define VID_DITHER_BAYER          0    /* FAST BAYER (ORDERED) DITHERING  */
+#define VID_DITHER_FLOYD_STEINBERG 1   /* HIGH QUALITY ERROR DIFFUSION     */
+
 /*
               ======================
                  --- STRUCTURES  ---
@@ -73,6 +78,8 @@ void vid_draw_rect(int x, int y, int width, int height, unsigned char color);
 void vid_draw_rect_fill(int x, int y, int width, int height, unsigned char color);
 void vid_draw_circle(int cX, int cY, int rad, unsigned char color);
 void vid_draw_polygon(const int *vertices, int num_vertices, unsigned char color);
+void vid_dither_blit(int x, int y, int width, int height, 
+                    unsigned char color1, unsigned char color2, int method);
 void vid_wait_vsync(void);
 
 #endif

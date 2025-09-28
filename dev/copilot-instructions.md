@@ -11,6 +11,12 @@
  - PLEASE USE dev/cform.c FOR FORMATTING AND FORMAT ALL WRITTEN CODE AND COMMENT CODE AND
    STRICLY FOLLOW THE FORMAT
 
+ -  FOR MAKING DEMOS/TESTS, PLEASE ADD THEM TO THE DEMO PROGRAM AT examples/demo.c
+
+  - COMPILE COMMAND: ./build.sh
+
+  - TEST COMMAND (simply run this and steward will perform test): dosbox
+
 
 C-FORM RULES BELOW vvv
 

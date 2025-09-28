@@ -256,6 +256,41 @@ int main(int argc, char*argv[]) {
     
     if (kbhit() && getch() == 27) break;
 
+    /* --- DITHERING DEMO --- */
+
+    pal_set_active(2);  /* use VGA palette for dithering demo */
+    vid_clear_buffer(0);
+
+    /* demonstrate bayer dithering on left side */
+
+    vid_dither_blit(20, 20, 120, 60, 0, 15, VID_DITHER_BAYER);        /* black/white */
+    vid_dither_blit(20, 90, 120, 60, 4, 12, VID_DITHER_BAYER);        /* red blend */
+
+    /* demonstrate floyd-steinberg dithering on right side */
+
+    vid_dither_blit(180, 20, 120, 60, 1, 9, VID_DITHER_FLOYD_STEINBERG);   /* blue blend */
+    vid_dither_blit(180, 90, 120, 60, 2, 10, VID_DITHER_FLOYD_STEINBERG);  /* green blend */
+
+    /* add some reference solid colors for comparison */
+
+    vid_draw_rect_fill(20, 160, 30, 20, 0);    /* solid black */
+    vid_draw_rect_fill(60, 160, 30, 20, 15);   /* solid white */
+    vid_draw_rect_fill(100, 160, 30, 20, 4);   /* solid red */
+    vid_draw_rect_fill(140, 160, 30, 20, 12);  /* solid bright red */
+
+    vid_draw_rect_fill(180, 160, 30, 20, 1);   /* solid blue */
+    vid_draw_rect_fill(220, 160, 30, 20, 9);   /* solid bright blue */
+    vid_draw_rect_fill(260, 160, 30, 20, 2);   /* solid green */
+    vid_draw_rect_fill(300, 160, 30, 20, 10);  /* solid bright green */
+
+    vid_present();
+
+    timer_wait_frame();
+
+    /* check for ESC key */
+    
+    if (kbhit() && getch() == 27) break;
+
   } 
   
   /* --- DEMO CLOSE ---               */
