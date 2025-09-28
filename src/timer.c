@@ -2,7 +2,7 @@
         ====================================
 
                     T I M E R . C
-	         CCOMET TIMER FILE
+	               CCOMET TIMER FILE
            CG MOON / ELASTIC SOFTWORKS 2025
   
         ====================================
@@ -10,7 +10,6 @@
 
 #include <dos.h>
 #include <time.h>
-#include <unistd.h>
 #include "timer.h"
 
 static clock_t start_time;
@@ -47,7 +46,7 @@ void timer_close(void) {
 
 /*
 
-           timer_get_ticks()
+     timer_get_ticks()
 	   ---
 	   Get current clock ticks since init
   
@@ -83,7 +82,7 @@ void timer_wait(unsigned long ticks) {
 
 /*
 
-           timer_wait_frame()
+     timer_wait_frame()
 	   ---
 	   Wait for one frame duration (1/60th second)
   

@@ -26,12 +26,13 @@
  */
 
 
-#ifndef CCOMET_H
-#define CCOMET_H
+#ifndef   CCOMET_H
+#define   CCOMET_H
 
-#include "video.h"
-#include "input.h"
-#include "audio.h"
-#include "timer.h"
+#include  "video.h"
+#include  "input.h"
+#include  "audio.h"
+#include  "timer.h"
+#include  "pal.h"
 
 #endif

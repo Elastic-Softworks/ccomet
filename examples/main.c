@@ -1,7 +1,6 @@
 #include  <ccomet.h>
 #include  <stdio.h>
 #include  <conio.h>
-#include  "pal.h"
 
 int main(int argc, char*argv[]) {
 
@@ -15,6 +14,7 @@ int main(int argc, char*argv[]) {
   getchar();
 
   timer_init();
+  pal_init();
   
   vid_set_mode(VID_MODE_13H);
 
@@ -24,19 +24,7 @@ int main(int argc, char*argv[]) {
 
     /* --- PIXEL DEMO ---             */
 
-    RGB _grayscale_pal[256];
-
-    int i;
-
-    for (i = 0; i < 256; i++) {
-
-      _grayscale_pal[i].r = i;
-      _grayscale_pal[i].g = i;
-      _grayscale_pal[i].b = i;
-      
-    }
-
-    vid_set_pal(_grayscale_pal);
+    pal_set_active(0);
     
     vid_clear_buffer(64);
 
@@ -53,10 +41,8 @@ int main(int argc, char*argv[]) {
     if (kbhit() && getch() == 27) break;
 
     /* --- LINE DEMO --- */
-
-    vid_set_pal(default_vga_pal);
     
-    vid_clear_buffer(0);
+    pal_set_active(2);    vid_clear_buffer(0);
 
     vid_draw_line(0,    0,  319,  199, 15);
     vid_draw_line(319,  0,    0,  199,  1);
@@ -76,7 +62,9 @@ int main(int argc, char*argv[]) {
     vid_clear_buffer(0);
 
     vid_draw_rect(50, 50, 100, 75, 15);
+
     vid_draw_rect_fill(200, 30, 80, 40, 4);
+
     vid_draw_circle(160, 130, 30, 2);
 
     vid_present();
@@ -87,8 +75,94 @@ int main(int argc, char*argv[]) {
     
     if (kbhit() && getch() == 27) break;
 
+    /* --- PALETTE DEMO --- */
+
+    /* show grayscale palette */
+
+    pal_set_active(0);
+    vid_clear_buffer(64);
+
+    vid_draw_rect(50, 50,  100, 50, 128);
+    vid_draw_rect(50, 110, 100, 50, 200);
+
+    vid_present();
+    timer_wait_frame();
+
+    if (kbhit() && getch() == 27) break;
+
+    /* show sepia palette */
+
+    pal_set_active(1);
+    vid_clear_buffer(64);
+
+    vid_draw_rect(200,  50, 100,  50, 128);
+    vid_draw_rect(200, 110, 100,  50, 200);
+
+    vid_present();
+    timer_wait_frame();
+
+    if (kbhit() && getch() == 27) break;
+
+    /* show VGA palette */
+
+    pal_set_active(2);
+    vid_clear_buffer(0);
+
+    vid_draw_rect(  50,  50, 100,  50,  4);   /* red    */
+    vid_draw_rect( 200,  50, 100,  50,  2);   /* green  */
+    vid_draw_rect(  50, 110, 100,  50,  1);   /* blue   */
+    vid_draw_rect( 200, 110, 100,  50, 14);   /* yellow */
+
+    vid_present();
+    timer_wait_frame();
+
+    if (kbhit() && getch() == 27) break;
+
+    pal_set_active(3);
+
+    vid_clear_buffer(0);
+    
+    /* 16x16 grid showing all 256 colors */
+
+    {
+      int   color, x, y, grid_x, grid_y;
+
+      int   square_size   = 12;      /* 12x12 pixels make a square */
+      int   start_x       = 16;      /* 16 px padding from right */
+      int   start_y       = 8;       /* 8 px padding from top */
+      
+      for (color = 0; color < 256; color++) {
+
+        grid_x  = color % 16;           /* 16 colors per row */
+        grid_y  = color / 16;           /* 16 rows total */
+        
+        x   = start_x + (grid_x * square_size);
+        y   = start_y + (grid_y * square_size);
+        
+        /* draw filled rectangle for this color */
+
+        vid_draw_rect_fill(x, y, square_size, square_size, color);
+        
+        /* draw a thin border around each square for visibility */
+
+        if (color != 0) {  
+
+          vid_draw_rect(x, y, square_size, square_size, 15); 
+
+        }
+
+      }
+      
+    }
+
+    vid_present();
+    timer_wait_frame();
+
+    if (kbhit() && getch() == 27) break;
+
     /* --- POLYGON DEMO --- */
 
+    pal_set_active(2);
     vid_clear_buffer(0);
 
     {

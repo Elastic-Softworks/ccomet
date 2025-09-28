@@ -2,7 +2,7 @@
         ====================================
 
                       P A L . H
-	            CCOMET PALETTE HEADER FILE
+             CCOMET PALETTE HEADER FILE
            CG MOON / ELASTIC SOFTWORKS 2025
   
          ====================================
@@ -25,31 +25,62 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef  PAL_H
-#define  PAL_H
+/* 
+              ======================
+	           --- SETUP ---
+              ======================
+*/
 
-#include "video.h"
+#ifndef  	PAL_H
+#define  	PAL_H
 
-static RGB default_vga_pal[16] = {
+#include 	"video.h"
 
-  {0, 0, 0},        /* 0 - black */
-  {0, 0, 170},      /* 1 - blue */
-  {0, 170, 0},      /* 2 - green */
-  {0, 170, 170},    /* 3 - cyan */
-  {170, 0, 0},      /* 4 - red */
-  {170, 0, 170},    /* 5 - magenta */
-  {170, 85, 0},     /* 6 - brown */
-  {170, 170, 170},  /* 7 - light gray */
-  {85, 85, 85},     /* 8 - dark gray */
-  {85, 85, 255},    /* 9 - light blue */
-  {85, 255, 85},    /* 10 - light green */
-  {85, 255, 255},   /* 11 - light cyan */
-  {255, 85, 85},    /* 12 - light red */
-  {255, 85, 255},   /* 13 - light magenta */
-  {255, 255, 85},   /* 14 - yellow */
-  {255, 255, 255}   /* 15 - white */
+/*
+              ======================
+                 --- CONSTANTS ---
+              ======================
+*/
+
+#define		PAL_MAX 	8
+#define		PAL_SIZE	256
+
+/*
+              ======================
+                 --- STRUCTURES ---
+              ======================
+*/
+
+typedef struct {
+
+  RGB 	colors[PAL_SIZE];
+  char 	name[32];
+  int 	active;
   
-  
-};
+} Pal;
+
+/*
+              ======================
+                --- PROTOTYPES ---
+              ======================
+*/
+
+void	pal_init(void);
+int	pal_load(const RGB *pal_data, const char *name);
+void	pal_set_active(int pal_id);
+int	pal_get_active(void);
+void	pal_apply_current(void);
+
+/*
+              ======================
+                 --- PALETTES ---
+              ======================
+*/
+
+extern	    RGB	pal_vga[256];
+extern	    RGB	pal_gray[256];
+extern	    RGB	pal_sepia[256];
+extern	    RGB	pal_win256[256];
 
 #endif
+

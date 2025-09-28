@@ -39,7 +39,7 @@ TASKS:
   [X] 4. High-Resolution Timer: Implement a timer using the Programmable
          Interval Timer (PIT) for precise animation timing, independent of
          CPU speed.
-  [ ] 5. VSync Synchronization: Implement `vid_wait_vsync()` to synchronize
+  [X] 5. VSync Synchronization: Implement `vid_wait_vsync()` to synchronize
          `vid_present()` with the monitor's vertical blanking interval to
          eliminate tearing and ensure smooth 60fps animation.
 
